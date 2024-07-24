@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import portrait from '@/assets/portrait.jpg';
 ---
 
@@ -27,7 +28,7 @@ import portrait from '@/assets/portrait.jpg';
           7+ years creating web awesome experiences. I love turning ideas into reality. I'm always
           seeking new challenges and learning new technologies.
         </p>
-        <div class="space-x-4">
+        <div class="space-x-4 mb-6">
           <a
             href="/skills"
             class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300"
@@ -41,6 +42,32 @@ import portrait from '@/assets/portrait.jpg';
             Contact
           </a>
         </div>
+        <div class="flex space-x-4 mb-6">
+          <a
+            href="https://github.com/rldorado"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-600 hover:text-blue-500 transition duration-300"
+          >
+            <Icon name="mdi:github" class="w-8 h-8" />
+          </a>
+          <a
+            href="https://linkedin.com/in/rldorado"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-600 hover:text-blue-500 transition duration-300"
+          >
+            <Icon name="mdi:linkedin" class="w-8 h-8" />
+          </a>
+        </div>
+        <a
+          href="/CV.pdf"
+          download
+          class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition duration-300 inline-flex items-center"
+        >
+          <Icon name="mdi:download" class="w-5 h-5 mr-2" />
+          Download my CV
+        </a>
       </div>
     </div>
   </div>
