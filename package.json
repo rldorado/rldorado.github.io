@@ -1,10 +1,12 @@
 {
 	"name": "rldorado.github.io",
+	"type": "module",
 	"scripts": {
 		"dev": "pnpm exec astro dev",
 		"build": "pnpm exec astro build",
 		"preview": "pnpm exec astro preview",
-		"deploy": "pnpm exec astro build && gh-pages -d dist"
+		"deploy": "pnpm exec astro build && gh-pages -d dist",
+		"format": "pnpm exec prettier --write \"src/**/*.{js,ts,vue,json}\""
 	},
 	"dependencies": {
 		"@astrojs/tailwind": "^5.1.0",
@@ -17,6 +19,7 @@
 	"devDependencies": {
 		"astro": "^4.11.5",
 		"gh-pages": "^6.1.1",
+		"prettier": "^3.3.3",
 		"typescript": "^5.5.3"
 	}
 }
