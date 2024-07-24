@@ -13,12 +13,17 @@
   const container = ref(null);
   const hoveredSkill = ref<Skill | null>(null);
   const mousePosition = reactive({ x: 0, y: 0 });
-  let scene, camera, renderer, controls, stars, lines;
+  let scene, camera, renderer, controls, stars, lines, backgroundStars, skillStars;
 
   onMounted(() => {
     if (!container.value) return;
 
     ({ scene, camera, renderer, controls } = setupScene(container.value));
+
+    // Create background stars
+    backgroundStars = createBackgroundStars();
+    scene.add(backgroundStars);
+
     stars = createStars(scene, skills);
     lines = createLines(scene, skills, stars);
 
@@ -49,6 +54,26 @@
       window.removeEventListener('resize', () => handleWindowResize);
     });
   });
+  
+  const createBackgroundStars = () => {
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.1,
+      sizeAttenuation: true
+    });
+
+    const starsVertices = [];
+    for (let i = 0; i < 10000; i++) {
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000;
+      const z = -Math.random() * 2000;
+      starsVertices.push(x, y, z);
+    }
+
+    starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+    return new THREE.Points(starsGeometry, starsMaterial);
+  }
 
   const handleSkillSelection = (skill) => {
     if (skill) {

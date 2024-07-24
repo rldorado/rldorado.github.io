@@ -1,5 +1,7 @@
 ---
 import Navigation from '@/components/Navigation.astro';
+import StarryBackground from '@/components/StarryBackground.vue';
+import { ViewTransitions } from 'astro:transitions';
 export interface Props {
   title: string;
 }
@@ -15,8 +17,10 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
+    <StarryBackground client:load />
     <Navigation />
     <main>
       <slot />
@@ -28,6 +32,8 @@ const { title } = Astro.props;
   /* Global styles */
   body {
     font-family: 'Inter', sans-serif;
+    color: #fff;
+    background-color: #000;
   }
 
   /* Fade in animation */
