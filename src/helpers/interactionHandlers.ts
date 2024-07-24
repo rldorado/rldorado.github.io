@@ -1,13 +1,6 @@
 import { gsap } from 'gsap';
 import * as THREE from 'three';
 import type { CurvedLine, StarMesh } from '../types/three-elements';
-import type { Ref } from 'vue';
-import type { Skill } from '../types/skills';
-
-interface InteractionState {
-  hoveredSkill: Ref<Skill | null>;
-  mousePosition: { x: number; y: number };
-}
 
 /**
  * Handles the mouse move event to interact with stars and lines in the scene.
@@ -18,7 +11,6 @@ interface InteractionState {
  * @param {THREE.Camera} camera - The camera used in the scene.
  * @param {StarMesh[]} stars - The array of star meshes in the scene.
  * @param {CurvedLine[]} lines - The array of curved lines in the scene.
- * @param {InteractionState} state - The state object containing interaction state.
  */
 export const handleMouseMove = (
   event: MouseEvent,
@@ -26,29 +18,32 @@ export const handleMouseMove = (
   mouse: THREE.Vector2,
   camera: THREE.Camera,
   stars: StarMesh[],
-  lines: CurvedLine[],
-  state: InteractionState
+  lines: CurvedLine[]
 ) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  state.mousePosition.x = event.clientX + 10;
-  state.mousePosition.y = event.clientY + 10;
+  const mousePosition = { x: event.clientX, y: event.clientY };
+
+  mousePosition.x = event.clientX + 10;
+  mousePosition.y = event.clientY + 10;
 
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(stars);
 
   resetStarsAndLines(stars, lines);
 
+  let hoveredSkill = null;
+
   if (intersects.length > 0) {
-    const intersectedStar = intersects[0].object;
-    state.hoveredSkill.value = intersectedStar.userData.skill;
+    const intersectedStar: StarMesh = intersects[0].object;
+    hoveredSkill = intersectedStar.userData.skill;
 
     animateHoveredStar(intersectedStar);
     highlightRelatedStarsAndLines(intersectedStar, stars, lines);
-  } else {
-    state.hoveredSkill.value = null;
   }
+
+  return { hoveredSkill, mousePosition };
 };
 
 /**

@@ -1,10 +1,47 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ConstellationSkills from "../components/ConstellationSkills.vue";
+import Layout from '@/layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import portrait from '@/assets/portrait.jpg';
 ---
 
-<Layout title="Rafael López Dorado">
-  <main>
-    <ConstellationSkills client:load />
-  </main>
+<Layout title="Rafael López Dorado - Frontend Engineer & Designer">
+  <div
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600"
+  >
+    <div
+      class="bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl max-w-4xl w-full mx-4 flex flex-col md:flex-row items-center"
+    >
+      <div class="md:w-1/2 mb-6 md:mb-0">
+        <Image
+          src={portrait}
+          alt="Rafael López Dorado"
+          class="rounded-full w-64 h-64 object-cover mx-auto"
+          width={256}
+          height={256}
+        />
+      </div>
+      <div class="md:w-1/2 md:pl-8">
+        <h1 class="text-4xl font-bold mb-4 text-gray-800">Rafael López Dorado</h1>
+        <h2 class="text-2xl text-blue-600 mb-4">Frontend Engineer & Designer</h2>
+        <p class="text-gray-600 mb-6">
+          7+ years creating web awesome experiences. I love turning ideas into reality. I'm always
+          seeking new challenges and learning new technologies.
+        </p>
+        <div class="space-x-4">
+          <a
+            href="/skills"
+            class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300"
+          >
+            My Skills
+          </a>
+          <a
+            href="/contact"
+            class="border border-blue-500 text-blue-500 px-6 py-2 rounded-full hover:bg-blue-500 hover:text-white transition duration-300"
+          >
+            Contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>

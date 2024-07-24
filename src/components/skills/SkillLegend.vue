@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { skills } from '../data/skills';
+  import { skills } from '../../data/skills.ts';
 
   const selectedSkill = ref(null);
   const emit = defineEmits(['skillSelected']);

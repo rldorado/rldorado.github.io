@@ -1,19 +1,14 @@
 <script setup lang="ts">
-  import { onMounted, ref, nextTick, reactive } from 'vue';
+  import { onMounted, ref, reactive } from 'vue';
   import * as THREE from 'three';
   import { gsap } from 'gsap';
 
-  import type { Skill } from '../types/skills';
-  import { skills } from '../data/skills';
-  import {
-    setupScene,
-    createStars,
-    createLines,
-    handleWindowResize
-  } from '../helpers/threeHelpers';
-  import { handleMouseMove } from '../helpers/interactionHandlers';
-  import SkillTooltip from './SkillTooltip.vue';
-  import SkillLegend from './SkillLegend.vue';
+  import type { Skill } from '@/types/skills';
+  import { skills } from '@/data/skills';
+  import { setupScene, createStars, createLines, handleWindowResize } from '@/helpers/threeHelpers';
+  import { handleMouseMove } from '@/helpers/interactionHandlers';
+  import SkillTooltip from './skills/SkillTooltip.vue';
+  import SkillLegend from './skills/SkillLegend.vue';
 
   const container = ref(null);
   const hoveredSkill = ref<Skill | null>(null);
@@ -38,8 +33,12 @@
 
     animate();
 
-    const onMouseMove = (event) =>
-      handleMouseMove(event, raycaster, mouse, camera, stars, lines, hoveredSkill, mousePosition);
+    const onMouseMove = (event: MouseEvent) => {
+      const result = handleMouseMove(event, raycaster, mouse, camera, stars, lines);
+      hoveredSkill.value = result.hoveredSkill;
+      mousePosition.x = result.mousePosition.x;
+      mousePosition.y = result.mousePosition.y;
+    };
 
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('resize', () => handleWindowResize(camera, renderer));
@@ -115,7 +114,8 @@
 </script>
 
 <template>
-  <div ref="container" class="w-full h-screen"></div>
-  <SkillTooltip :skill="hoveredSkill" :position="mousePosition" />
-  <SkillLegend @skillSelected="handleSkillSelection" />
+  <div ref="container" class="w-full h-screen">
+    <SkillTooltip :skill="hoveredSkill" :position="mousePosition" />
+    <SkillLegend @skillSelected="handleSkillSelection" />
+  </div>
 </template>

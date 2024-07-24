@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '@/components/ContactForm.vue';
+---
+
+<Layout title="Rafael López Dorado - Contact">
+  <div class="container mx-auto px-4 py-16 mt-16">
+    <h1 class="text-3xl font-bold mb-4">Contact</h1>
+    <ContactForm client:load />
+  </div>
+</Layout>

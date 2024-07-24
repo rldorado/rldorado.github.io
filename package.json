@@ -1,25 +1,27 @@
 {
-	"name": "rldorado.github.io",
-	"type": "module",
-	"scripts": {
-		"dev": "pnpm exec astro dev",
-		"build": "pnpm exec astro build",
-		"preview": "pnpm exec astro preview",
-		"deploy": "pnpm exec astro build && gh-pages -d dist",
-		"format": "pnpm exec prettier --write \"src/**/*.{js,ts,vue,json}\""
-	},
-	"dependencies": {
-		"@astrojs/tailwind": "^5.1.0",
-		"@astrojs/vue": "^4.5.0",
-		"gsap": "^3.12.5",
-		"tailwindcss": "^3.4.4",
-		"three": "^0.166.1",
-		"vue": "^3.4.31"
-	},
-	"devDependencies": {
-		"astro": "^4.11.5",
-		"gh-pages": "^6.1.1",
-		"prettier": "^3.3.3",
-		"typescript": "^5.5.3"
-	}
+  "name": "rldorado.github.io",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm exec astro dev",
+    "build": "pnpm exec astro build",
+    "preview": "pnpm exec astro preview",
+    "deploy": "pnpm exec astro build && gh-pages -d dist",
+    "format": "pnpm exec prettier --write . --ignore-path .gitignore --ignore-path .prettierignore --plugin=prettier-plugin-astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/vue": "^4.5.0",
+    "gsap": "^3.12.5",
+    "tailwindcss": "^3.4.4",
+    "three": "^0.166.1",
+    "vue": "^3.4.31"
+  },
+  "devDependencies": {
+    "astro": "^4.11.5",
+    "gh-pages": "^6.1.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.33.4",
+    "typescript": "^5.5.3"
+  }
 }
