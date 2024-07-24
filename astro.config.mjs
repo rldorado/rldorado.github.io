@@ -11,10 +11,5 @@ export default defineConfig({
     }),
     tailwind()
   ],
-  site: 'https://rldorado.github.io',
-  vite: {
-    ssr: {
-      noExternal: ['vue-router']
-    }
-  }
+  site: 'https://rldorado.github.io'
 });
