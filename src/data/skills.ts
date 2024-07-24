@@ -9,6 +9,6 @@ export const skills: Skill[] = [
   { name: 'Node.js', color: '#339933', level: 0.5, related: ['JavaScript'] },
   { name: 'HTML', color: '#e34f26', level: 0.9, related: ['CSS'] },
   { name: 'CSS', color: '#2965f1', level: 0.9, related: ['HTML'] },
-  { name: 'Astro', color: '#ff5f57', level: 0.3, related: ['HTML', 'JavaScript'] },
+  { name: 'Astro', color: '#ff5f57', level: 0.5, related: ['HTML', 'JavaScript'] },
   { name: 'Three.js', color: '#ffdd57', level: 0.3, related: ['JavaScript'] }
 ];
