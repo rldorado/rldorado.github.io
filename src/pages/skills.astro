@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ConstellationSkills from '../components/ConstellationSkills.vue';
+import SolarSystemSkills from '../components/SolarSystemSkills.vue';
 ---
 
 <Layout title="Rafael López Dorado - Skills">
-  <ConstellationSkills client:load />
+  <div class="min-h-screen relative">
+    <SolarSystemSkills client:load />
+  </div>
 </Layout>

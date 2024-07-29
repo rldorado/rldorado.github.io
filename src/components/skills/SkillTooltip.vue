@@ -1,10 +1,9 @@
 <script setup lang="ts">
   import type { Skill } from '@/types/skills';
-  import type { StarMesh } from '@/types/three-elements';
 
   defineProps<{
     skill: Skill | null;
-    position: StarMesh['position'];
+    position: { x: number; y: number };
   }>();
 </script>
 

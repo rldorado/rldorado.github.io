@@ -1,11 +1,22 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import aboutmePortrait from '@/assets/aboutme.jpg';
 ---
 
 <Layout title="Rafael López Dorado - About me">
   <div class="min-h-screen py-16 flex items-center justify-center p-4">
     <div class="bg-black bg-opacity-70 rounded-lg shadow-lg p-8 max-w-3xl mx-auto text-white">
-      <h1 class="text-4xl font-bold mb-8 text-center text-blue-300">About me</h1>
+      <h1 class="text-4xl font-bold mb-4 text-center md:text-left text-blue-300">About me</h1>
+      <div class="flex flex-col items-center mb-8">
+        <Image
+          src={aboutmePortrait}
+          alt="Rafael López Dorado"
+          class="rounded-lg w-full h-auto object-cover mb-6"
+          width={800}
+          height={600}
+        />
+      </div>
       <div class="space-y-6">
         <p class="text-lg text-gray-300">
           I am a Frontend engineer with over 7 years of experience, specializing in creating

@@ -3,5 +3,9 @@ export interface Skill {
   icon?: string;
   color?: string;
   level: number;
-  related?: string[];
+}
+
+export interface SkillCategory {
+  name: string;
+  skills: Skill[];
 }
