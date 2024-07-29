@@ -1,21 +1,67 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { projects } from '../data/projects';
+import { Icon } from 'astro-icon/components';
+
+const allTechnologies = [...new Set(projects.flatMap((project) => project.technologies))];
 ---
 
-<Layout title="Rafael López Dorado - Proyectos">
-  <div class="min-h-screen py-16">
-    <div class="container mx-auto px-4 mt-0 md:mt-16">
+<Layout title="Rafael López Dorado - Projects">
+  <div class="min-h-screen py-16 px-4">
+    <div class="container mx-auto">
       <h1 class="text-4xl font-bold mb-8 text-center text-blue-300">My Projects</h1>
+
+      <div class="mb-8 flex flex-wrap justify-center gap-2" id="filters">
+        <button
+          class="filter-btn active bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition-colors duration-300"
+          data-filter="all">All</button
+        >
+        {
+          allTechnologies.map((tech) => (
+            <button
+              class="filter-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full transition-colors duration-300"
+              data-filter={tech}
+            >
+              {tech}
+            </button>
+          ))
+        }
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
           projects.map((project) => (
-            <div class="bg-black bg-opacity-70 rounded-lg shadow-lg overflow-hidden">
-              <img src={project.image} alt={project.name} class="w-full h-48 object-cover" />
+            <div
+              class="project-card bg-black bg-opacity-50 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300"
+              data-technologies={project.technologies.join(',')}
+            >
+              {project.link ? (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block relative"
+                >
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    class="w-full h-[16rem] md:h-[24rem] object-cover"
+                  />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-white text-lg font-semibold">View Project</span>
+                  </div>
+                </a>
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  class="w-full h-[16rem] md:h-[24rem] object-cover"
+                />
+              )}
               <div class="p-6">
                 <h2 class="text-2xl font-bold mb-2 text-blue-300">{project.name}</h2>
                 <p class="text-gray-300 mb-4">{project.description}</p>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech) => (
                     <span class="bg-blue-500 bg-opacity-50 text-white text-sm font-semibold px-2.5 py-0.5 rounded">
                       {tech}
@@ -30,3 +76,29 @@ import { projects } from '../data/projects';
     </div>
   </div>
 </Layout>
+
+<script>
+  // Filter projects
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      filterButtons.forEach((btn) =>
+        btn.classList.remove('active', 'bg-blue-500', 'hover:bg-blue-600')
+      );
+      button.classList.add('active', 'bg-blue-500', 'hover:bg-blue-600');
+
+      projectCards.forEach((card) => {
+        const technologies = card.getAttribute('data-technologies').split(',');
+        if (filter === 'all' || technologies.includes(filter)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

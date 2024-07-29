@@ -1,20 +1,29 @@
 export const projects = [
   {
-    name: 'Portfolio Constellation',
+    name: 'Portfolio Skill Constellations',
     description: 'An interactive portfolio showcasing skills as a 3D constellation.',
-    image: '/images/portfolio-constellation.webp',
-    technologies: ['Vue.js', 'Three.js', 'Astro', 'Tailwind CSS']
+    image: '/images/portfolio-constellations.png',
+    technologies: ['Astro', 'Vue', 'TypeScript', 'Three.js', 'Tailwind CSS']
   },
   {
-    name: 'E-commerce Dashboard',
-    description: 'Dashboard for an e-commerce platform with real-time analytics.',
-    image: '/images/ecommerce-dashboard.webp',
-    technologies: ['React', 'Redux', 'Node.js', 'MongoDB']
+    name: 'Contemplarol app',
+    description: 'A Progressive Web App (PWA) for managing tabletop roleplaying events.',
+    image: '/images/contemplarolapp.png',
+    technologies: ['PWA', 'Vue', 'TypeScript', 'Tailwind CSS', 'Vite', 'Jest', 'Cypress'],
+    link: 'https://contemplarol.netlify.app/'
   },
   {
-    name: 'Task Manager App',
-    description: 'Task management application with real-time collaboration features.',
-    image: '/images/task-manager.webp',
-    technologies: ['Angular', 'Firebase', 'RxJS', 'Material Design']
+    name: 'Refurbed - Checkout & Payments',
+    description: 'An e-commerce checkout and payments integration.',
+    image: '/images/refurbed-checkout.png',
+    technologies: ['Vue', 'TypeScript', 'Tailwind CSS', 'Vite', 'A/B Testing', 'Stripe', 'Jest', 'Cypress'],
+    link: 'https://www.refurbed.de/checkout/'
+  },
+  {
+    name: 'Receipt Generator',
+    description: 'An application that generates PDF receipts based on user input.',
+    image: '/images/receipt-generator.png',
+    technologies: ['React', 'TypeScript', 'DaisyUI', 'jspdf', 'Tailwind CSS', 'Vite', 'react-i18n'],
+    link: 'https://generador-recibos.netlify.app/'
   }
 ];

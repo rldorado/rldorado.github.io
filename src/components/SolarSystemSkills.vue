@@ -11,7 +11,7 @@
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
   import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-  import { frontendSkills, backendSkills } from '@/data/skills';
+  import { frontendSkills, backendSkills, designSkills } from '@/data/skills';
   import type { Skill, SkillCategory } from '@/types/skills';
   import SkillTooltip from './skills/SkillTooltip.vue';
   import SkillLegend from './skills/SkillLegend.vue';
@@ -24,6 +24,10 @@
     {
       name: 'Backend',
       skills: backendSkills
+    },
+    {
+      name: 'Design',
+      skills: designSkills
     }
   ];
 
