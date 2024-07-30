@@ -6,6 +6,13 @@ export const projects = [
     technologies: ['Astro', 'Vue', 'TypeScript', 'Three.js', 'Tailwind CSS']
   },
   {
+    name: 'Rol Dorado',
+    description: 'CMS Website for an online club that specializes in tabletop roleplaying games.',
+    image: '/images/rol-dorado.png',
+    technologies: ['Vue', 'TypeScript', 'Tailwind CSS', 'Nuxt', 'Storyblok'],
+    link: 'https://roldorado.com/'
+  },
+  {
     name: 'Contemplarol app',
     description: 'A Progressive Web App (PWA) for managing tabletop roleplaying events.',
     image: '/images/contemplarolapp.png',

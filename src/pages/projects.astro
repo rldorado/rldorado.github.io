@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { projects } from '../data/projects';
-import { Icon } from 'astro-icon/components';
 
-const allTechnologies = [...new Set(projects.flatMap((project) => project.technologies))];
+const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project.technologies))];
 ---
 
 <Layout title="Rafael López Dorado - Projects">
@@ -11,28 +10,64 @@ const allTechnologies = [...new Set(projects.flatMap((project) => project.techno
     <div class="container mx-auto">
       <h1 class="text-4xl font-bold mb-8 text-center text-blue-300">My Projects</h1>
 
-      <div class="mb-8 flex flex-wrap justify-center gap-2" id="filters">
-        <button
-          class="filter-btn active bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition-colors duration-300"
-          data-filter="all">All</button
-        >
-        {
-          allTechnologies.map((tech) => (
+      <div class="mb-8 flex justify-center">
+        <div class="relative inline-block text-left">
+          <div>
             <button
-              class="filter-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full transition-colors duration-300"
-              data-filter={tech}
+              type="button"
+              class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+              id="filter-menu-button"
+              aria-expanded="true"
+              aria-haspopup="true"
             >
-              {tech}
+              Filter by tech
+              <svg
+                class="-mr-1 ml-2 h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
             </button>
-          ))
-        }
+          </div>
+
+          <div
+            class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="filter-menu-button"
+            tabindex="-1"
+            id="filter-menu"
+          >
+            <div class="py-1" role="none">
+              {
+                allTechnologies.map((tech) => (
+                  <a
+                    href="#"
+                    class="filter-option text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                    role="menuitem"
+                    tabindex="-1"
+                    data-filter={tech === 'All' ? 'all' : tech}
+                  >
+                    {tech}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
         {
           projects.map((project) => (
             <div
-              class="project-card bg-black bg-opacity-50 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300"
+              class="project-card bg-black bg-opacity-50 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 flex flex-col"
               data-technologies={project.technologies.join(',')}
             >
               {project.link ? (
@@ -40,28 +75,30 @@ const allTechnologies = [...new Set(projects.flatMap((project) => project.techno
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="block relative"
+                  class="block relative flex-shrink-0"
                 >
                   <img
                     src={project.image}
                     alt={project.name}
-                    class="w-full h-[16rem] md:h-[24rem] object-cover"
+                    class="w-full h-[16rem] md:h-[24rem] object-cover transition-opacity duration-300 hover:opacity-75"
                   />
                   <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
                     <span class="text-white text-lg font-semibold">View Project</span>
                   </div>
                 </a>
               ) : (
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  class="w-full h-[16rem] md:h-[24rem] object-cover"
-                />
+                <div class="relative flex-shrink-0">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    class="w-full h-[16rem] md:h-[24rem] object-cover"
+                  />
+                </div>
               )}
-              <div class="p-6">
+              <div class="p-6 flex-grow flex flex-col">
                 <h2 class="text-2xl font-bold mb-2 text-blue-300">{project.name}</h2>
-                <p class="text-gray-300 mb-4">{project.description}</p>
-                <div class="flex flex-wrap gap-2 mb-4">
+                <p class="text-gray-300 mb-4 flex-grow">{project.description}</p>
+                <div class="flex flex-wrap gap-2 mt-auto">
                   {project.technologies.map((tech) => (
                     <span class="bg-blue-500 bg-opacity-50 text-white text-sm font-semibold px-2.5 py-0.5 rounded">
                       {tech}
@@ -78,18 +115,21 @@ const allTechnologies = [...new Set(projects.flatMap((project) => project.techno
 </Layout>
 
 <script>
-  // Filter projects
-  const filterButtons = document.querySelectorAll('.filter-btn');
+  const filterMenuButton = document.getElementById('filter-menu-button');
+  const filterMenu = document.getElementById('filter-menu');
+  const filterOptions = document.querySelectorAll('.filter-option');
   const projectCards = document.querySelectorAll('.project-card');
 
-  filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const filter = button.getAttribute('data-filter');
+  filterMenuButton.addEventListener('click', () => {
+    filterMenu.classList.toggle('hidden');
+  });
 
-      filterButtons.forEach((btn) =>
-        btn.classList.remove('active', 'bg-blue-500', 'hover:bg-blue-600')
-      );
-      button.classList.add('active', 'bg-blue-500', 'hover:bg-blue-600');
+  filterOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = option.getAttribute('data-filter');
+      filterMenuButton.textContent = option.textContent;
+      filterMenu.classList.add('hidden');
 
       projectCards.forEach((card) => {
         const technologies = card.getAttribute('data-technologies').split(',');
@@ -100,5 +140,12 @@ const allTechnologies = [...new Set(projects.flatMap((project) => project.techno
         }
       });
     });
+  });
+
+  // Close the menu if clicked outside
+  document.addEventListener('click', (e) => {
+    if (!filterMenuButton.contains(e.target) && !filterMenu.contains(e.target)) {
+      filterMenu.classList.add('hidden');
+    }
   });
 </script>
