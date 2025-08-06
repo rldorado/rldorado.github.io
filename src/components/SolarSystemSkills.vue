@@ -132,7 +132,7 @@
         const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial);
         orbit.add(orbitLine);
 
-        const planetGeometry = new THREE.SphereGeometry(skill.level * 1.5, 32, 32);
+        const planetGeometry = new THREE.SphereGeometry(skill.level * 2, 32, 32);
         const planetMaterial = new THREE.MeshBasicMaterial({ color: skill.color });
         const planet = new THREE.Mesh(planetGeometry, planetMaterial);
         planet.position.x = distance;
@@ -172,7 +172,7 @@
     solarSystems.forEach((solarSystem) => {
       solarSystem.children.forEach((orbit, index) => {
         if (orbit instanceof THREE.Group) {
-          orbit.rotation.z += 0.001 / (index + 1);
+          orbit.rotation.z += 0.01 / (index + 1);
         }
       });
     });
