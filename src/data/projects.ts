@@ -7,10 +7,10 @@ export const projects = [
   },
   {
     name: 'Rol Dorado',
-    description: 'CMS website for an online club specializing in tabletop roleplaying games.',
+    description: 'Website for events of an online club specializing in tabletop roleplaying games.',
     image: '/images/rol-dorado.png',
     technologies: ['Vue', 'TypeScript', 'Tailwind CSS', 'Nuxt', 'Storyblok'],
-    link: 'https://roldorado.vercel.app/'
+    link: 'https://roldorado.com/'
   },
   {
     name: 'Contemplarol app',
