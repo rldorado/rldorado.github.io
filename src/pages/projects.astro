@@ -8,7 +8,7 @@ const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project
 <Layout title="Rafael López Dorado - Projects">
   <div class="min-h-screen py-16 px-4">
     <div class="container mx-auto">
-      <h1 class="text-4xl font-bold mb-8 text-center text-blue-300">My Projects</h1>
+      <h1 class="text-4xl font-bold mb-8 text-center text-blue-300">Case Studies</h1>
 
       <div class="mb-8 flex justify-center">
         <div class="relative inline-block text-left">
@@ -82,7 +82,7 @@ const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project
                     class="w-full h-[16rem] md:h-[24rem] object-cover transition-opacity duration-300 hover:opacity-75"
                   />
                   <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <span class="text-white text-lg font-semibold">View Project</span>
+                    <span class="text-white text-lg font-semibold">View Case Study</span>
                   </div>
                 </a>
               ) : (
@@ -96,7 +96,7 @@ const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project
               )}
               <div class="p-6 flex-grow flex flex-col">
                 <h2 class="text-2xl font-bold mb-2 text-blue-300">{project.name}</h2>
-                <p class="text-gray-300 mb-4 flex-grow">{project.description}</p>
+                <p class="text-gray-300 mb-4 flex-grow whitespace-pre-line">{project.description}</p>
                 <div class="flex flex-wrap gap-2 mt-auto">
                   {project.technologies.map((tech) => (
                     <span class="bg-blue-500 bg-opacity-50 text-white text-sm font-semibold px-2.5 py-0.5 rounded">

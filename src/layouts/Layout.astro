@@ -19,6 +19,12 @@ const isSkillsPage = title.includes('Skills');
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=IBM+Plex+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css"
       rel="stylesheet"
@@ -37,11 +43,28 @@ const isSkillsPage = title.includes('Skills');
 </html>
 
 <style is:global>
+  /* Import Geist Variable font from Fontsource CDN */
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url('https://cdn.jsdelivr.net/fontsource/fonts/geist:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  
   /* Global styles */
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Geist', 'Inter', 'IBM Plex Sans', 'Work Sans', sans-serif;
+    font-weight: 400;
     color: #fff;
     background-color: #000;
+  }
+
+  /* Headings - bold */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Geist', 'Inter', 'IBM Plex Sans', 'Work Sans', sans-serif;
+    font-weight: 700;
   }
 
   /* Fade in animation */
