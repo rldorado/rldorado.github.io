@@ -1,5 +1,4 @@
 ---
-import Navigation from '@/components/Navigation.astro';
 import StarryBackground from '@/components/StarryBackground.vue';
 import { ViewTransitions } from 'astro:transitions';
 export interface Props {
@@ -35,7 +34,6 @@ const isSkillsPage = title.includes('Skills');
   </head>
   <body>
     {!isSkillsPage && <StarryBackground client:load />}
-    <Navigation />
     <main>
       <slot />
     </main>
