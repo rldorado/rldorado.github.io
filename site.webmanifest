@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Rafael López Dorado",
+    "short_name": "rldorado",
     "icons": [
        {
           "src": "/android-chrome-192x192.png",
@@ -8,7 +8,7 @@
           "type": "image/png"
        }
     ],
-    "theme_color": "#FFFFFF",
-    "background_color": "#FFFFFF",
+    "theme_color": "#000000",
+    "background_color": "#000000",
     "display": "standalone"
  }
