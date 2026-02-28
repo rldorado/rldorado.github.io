@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import vue from '@astrojs/vue';
-
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 
@@ -8,12 +7,12 @@ import icon from 'astro-icon';
 export default defineConfig({
   integrations: [
     vue({
-      devtools: true
+      devtools: import.meta.env.DEV,
     }),
     tailwind(),
     icon({
-      sets: ['mdi']
-    })
+      sets: ['mdi'],
+    }),
   ],
-  site: 'https://rldorado.github.io'
+  site: 'https://rldorado.dev',
 });

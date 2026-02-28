@@ -1,16 +1,25 @@
 ---
+import Navigation from '@/components/Navigation.astro';
 import StarryBackground from '@/components/StarryBackground.vue';
 import { ViewTransitions } from 'astro:transitions';
+
 export interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = 'Senior Front-end Engineer specializing in Vue/Nuxt architecture, scalable UI systems, and front-end clarity.',
+} = Astro.props;
+
 const isSkillsPage = title.includes('Skills');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -18,21 +27,32 @@ const isSkillsPage = title.includes('Skills');
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=IBM+Plex+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="canonical" href={canonicalURL} />
     <link
       href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css"
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <title>{title}</title>
     <ViewTransitions />
   </head>
   <body>
+    <Navigation />
     {!isSkillsPage && <StarryBackground client:load />}
     <main>
       <slot />
@@ -41,7 +61,6 @@ const isSkillsPage = title.includes('Skills');
 </html>
 
 <style is:global>
-  /* Import Geist Variable font from Fontsource CDN */
   @font-face {
     font-family: 'Geist';
     font-style: normal;
@@ -50,29 +69,22 @@ const isSkillsPage = title.includes('Skills');
     src: url('https://cdn.jsdelivr.net/fontsource/fonts/geist:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
-  
-  /* Global styles */
+
   body {
-    font-family: 'Geist', 'Inter', 'IBM Plex Sans', 'Work Sans', sans-serif;
+    font-family: 'Geist', sans-serif;
     font-weight: 400;
     color: #fff;
     background-color: #000;
   }
 
-  /* Headings - bold */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Geist', 'Inter', 'IBM Plex Sans', 'Work Sans', sans-serif;
+    font-family: 'Geist', sans-serif;
     font-weight: 700;
   }
 
-  /* Fade in animation */
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   main {

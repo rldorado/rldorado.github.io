@@ -1,68 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { projects } from '../data/projects';
+import Layout from '@/layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { projects } from '@/data/projects';
 
 const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project.technologies))];
 ---
 
-<Layout title="Rafael López Dorado - Projects">
+<Layout
+  title="Rafael López Dorado - Projects"
+  description="Case studies: TTRPG community platform, e-commerce checkout, and more."
+>
   <div class="min-h-screen py-16 px-4">
     <div class="container mx-auto">
       <h1 class="text-4xl font-bold mb-8 text-center text-blue-300">Case Studies</h1>
 
-      <div class="mb-8 flex justify-center">
-        <div class="relative inline-block text-left">
-          <div>
+      <div class="mb-10 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by technology">
+        {
+          allTechnologies.map((tech) => (
             <button
               type="button"
-              class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-blue-500 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
-              id="filter-menu-button"
-              aria-expanded="true"
-              aria-haspopup="true"
+              class="filter-pill text-xs font-medium px-3 py-1.5 rounded-sm border transition-colors duration-150 focus:outline-none focus:ring-1 focus:ring-blue-400/50"
+              data-filter={tech === 'All' ? 'all' : tech}
+              aria-pressed={tech === 'All' ? 'true' : 'false'}
             >
-              Filter by tech
-              <svg
-                class="-mr-1 ml-2 h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path>
-              </svg>
+              {tech}
             </button>
-          </div>
-          <div
-            class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="filter-menu-button"
-            tabindex="-1"
-            id="filter-menu"
-          >
-            <div class="py-1" role="none">
-              {
-                allTechnologies.map((tech) => (
-                  <a
-                    href="#"
-                    class="filter-option text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
-                    role="menuitem"
-                    tabindex="-1"
-                    data-filter={tech === 'All' ? 'all' : tech}
-                  >
-                    {tech}
-                  </a>
-                ))
-              }
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+      <div class="grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]" id="projects-grid">
         {
           projects.map((project) => (
             <div
@@ -76,10 +43,12 @@ const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project
                   rel="noopener noreferrer"
                   class="block relative flex-shrink-0"
                 >
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.name}
-                    class="w-full h-[16rem] md:h-[24rem] object-cover transition-opacity duration-300 hover:opacity-75"
+                    width={800}
+                    height={384}
+                    class="w-full h-[16rem] md:h-[32rem] object-cover transition-opacity duration-300 hover:opacity-75"
                   />
                   <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
                     <span class="text-white text-lg font-semibold">View Case Study</span>
@@ -87,17 +56,19 @@ const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project
                 </a>
               ) : (
                 <div class="relative flex-shrink-0">
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.name}
-                    class="w-full h-[16rem] md:h-[24rem] object-cover"
+                    width={800}
+                    height={384}
+                    class="w-full h-[16rem] md:h-[32rem] object-cover"
                   />
                 </div>
               )}
               <div class="p-6 flex-grow flex flex-col">
                 <h2 class="text-2xl font-bold mb-2 text-blue-300">{project.name}</h2>
-                <p class="text-gray-300 mb-4 flex-grow whitespace-pre-line">{project.description}</p>
-                <div class="flex flex-wrap gap-2 mt-auto">
+                <p class="text-gray-300 mb-4 whitespace-pre-line">{project.description}</p>
+                <div class="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span class="bg-blue-500 bg-opacity-50 text-white text-sm font-semibold px-2.5 py-0.5 rounded">
                       {tech}
@@ -113,38 +84,38 @@ const allTechnologies = ['All', ...new Set(projects.flatMap((project) => project
   </div>
 </Layout>
 
+<style>
+  .filter-pill {
+    color: rgb(156 163 175);
+    border-color: rgb(255 255 255 / 0.1);
+    background: transparent;
+  }
+  .filter-pill:hover {
+    color: rgb(147 197 253);
+    border-color: rgb(147 197 253 / 0.4);
+  }
+  .filter-pill[aria-pressed="true"] {
+    color: rgb(147 197 253);
+    border-color: rgb(147 197 253 / 0.5);
+    background: rgb(147 197 253 / 0.07);
+  }
+</style>
+
 <script>
-  const filterMenuButton = document.getElementById('filter-menu-button');
-  const filterMenu = document.getElementById('filter-menu');
-  const filterOptions = document.querySelectorAll('.filter-option');
-  const projectCards = document.querySelectorAll('.project-card');
+  const filterPills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+  const projectCards = document.querySelectorAll<HTMLElement>('.project-card');
 
-  filterMenuButton.addEventListener('click', () => {
-    filterMenu.classList.toggle('hidden');
-  });
+  filterPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const filter = pill.getAttribute('data-filter') ?? 'all';
 
-  filterOptions.forEach((option) => {
-    option.addEventListener('click', (e) => {
-      e.preventDefault();
-      const filter = option.getAttribute('data-filter');
-      filterMenuButton.textContent = option.textContent;
-      filterMenu.classList.add('hidden');
+      filterPills.forEach((p) => p.setAttribute('aria-pressed', 'false'));
+      pill.setAttribute('aria-pressed', 'true');
 
       projectCards.forEach((card) => {
-        const technologies = card.getAttribute('data-technologies').split(',');
-        if (filter === 'all' || technologies.includes(filter)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+        const technologies = card.getAttribute('data-technologies')?.split(',') ?? [];
+        card.style.display = filter === 'all' || technologies.includes(filter) ? '' : 'none';
       });
     });
-  });
-
-  // Close the menu if clicked outside
-  document.addEventListener('click', (e) => {
-    if (!filterMenuButton.contains(e.target) && !filterMenu.contains(e.target)) {
-      filterMenu.classList.add('hidden');
-    }
   });
 </script>

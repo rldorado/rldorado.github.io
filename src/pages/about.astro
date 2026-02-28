@@ -4,7 +4,10 @@ import { Image } from 'astro:assets';
 import aboutmePortrait from '@/assets/aboutme.jpg';
 ---
 
-<Layout title="Rafael López Dorado - About me">
+<Layout
+  title="Rafael López Dorado - About me"
+  description="8+ years building Vue/Nuxt front-ends. I help teams avoid front-end debt and ship maintainable UIs."
+>
   <div class="min-h-screen py-16 flex items-center justify-center p-4">
     <div class="bg-black bg-opacity-70 rounded-lg shadow-lg p-8 max-w-3xl mx-auto text-white">
       <h1 class="text-4xl font-bold mb-4 text-center md:text-left text-blue-300">About me</h1>
@@ -20,14 +23,16 @@ import aboutmePortrait from '@/assets/aboutme.jpg';
       <div class="space-y-6">
         <blockquote class="border-l-4 border-blue-400 pl-4 italic text-lg text-gray-300 bg-blue-950 bg-opacity-30 py-2">
           <span>
-            I’m a Principal Front-end Engineer focused on building front-ends that last.
+            I'm a Principal Front-end Engineer focused on building front-ends that last.
           </span>
         </blockquote>
         <p class="text-lg text-gray-300">
-          Over the last 8+ years I’ve worked mostly with Vue/Nuxt, scaling UI systems, cleaning up legacy codebases and helping teams avoid drowning in CSS and front-end debt.</p>
-          <p class="text-lg text-gray-300">
-          I care about architecture that real teams can maintain: clear components, predictable patterns, and performance that doesn’t require heroics to keep.</p>
-          <p class="text-lg text-gray-300">
+          Over the last 8+ years I've worked mostly with Vue/Nuxt, scaling UI systems, cleaning up legacy codebases and helping teams avoid drowning in CSS and front-end debt.
+        </p>
+        <p class="text-lg text-gray-300">
+          I care about architecture that real teams can maintain: clear components, predictable patterns, and performance that doesn't require heroics to keep.
+        </p>
+        <p class="text-lg text-gray-300">
           Outside of work, I run tabletop roleplaying games and design narrative systems — which is probably why I think so much in terms of systems, feedback loops and long-term consequences in code and product.
         </p>
       </div>

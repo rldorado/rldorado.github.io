@@ -1,9 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SolarSystemSkills from '../components/SolarSystemSkills.vue';
+import Layout from '@/layouts/Layout.astro';
+import SolarSystemSkills from '@/components/SolarSystemSkills.vue';
 ---
 
-<Layout title="Rafael López Dorado - Skills">
+<Layout
+  title="Rafael López Dorado - Skills"
+  description="Interactive 3D skills map built with Three.js. Explore front-end, back-end, and design skills."
+>
   <div class="min-h-screen relative">
     <SolarSystemSkills client:load />
   </div>
